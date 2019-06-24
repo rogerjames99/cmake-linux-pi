@@ -1,0 +1,33 @@
+# cmake-linux-pi
+Example for a cmake based cross compilation environment running gcc on linux and producing code for the raspberry pi.
+
+It contains content copied from a number of places. Many thanks to the authors. This would not be possible without them.
+## Overview
+This repository contains instructions and examples to enable you to set up a gcc based cross compilation running on an x86_64 Linux system and producing executables targeted at the Raspberry Pi bcm2708 platform. It uses CMake as the build environment.
+## Stage 1 - Preparation
+Firstly we need to prepare a directory on the host system containing a sysroot from the target system and a toolchain provided by the raspberrypi/tools project on github.
+1. Choose a location. I use a directory called raspi in my home directory.
+
+ ```mkdir ~/raspi```
+2. Clone the raspberrypi/tools repository into the directory.
+
+ ```git clone https://github.com/raspberrypi/tools.git ~/raspi/tools```
+3. Make the sysroot.
+
+ ```shell
+ # Substitute your username on the pi and its hostname or ip address in the commands below.
+ mkdir ~/raspi/sysroot ~/raspi/sysroot/usr ~/raspi/sysroot/opt
+ rsync -avz pi@raspberrypi_ip:/lib sysroot
+ rsync -avz pi@raspberrypi_ip:/usr/include sysroot/usr
+ rsync -avz pi@raspberrypi_ip:/usr/lib sysroot/usr
+ rsync -avz pi@raspberrypi_ip:/opt/vc sysroot/opt
+ ```
+ 4. Make all the symbolic links in the sysroot relative. Again I pull a script from github to do this.
+
+  ```shell
+  wget -P ~/raspi https://raw.githubusercontent.com/riscv/riscv-poky/master/scripts/sysroot-relativelinks.py
+chmod +x ~/raspi/sysroot-relativelinks.py
+~/raspi/sysroot-relativelinks.py ~/raspi/sysroot
+```
+4. The sysroot and tools are now ready.
+# Work in progress
