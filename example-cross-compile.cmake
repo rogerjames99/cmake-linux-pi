@@ -1,10 +1,10 @@
 set(CMAKE_SYSTEM_NAME Linux)
 set(CMAKE_SYSTEM_PROCESSOR arm)
 
-set(CMAKE_SYSROOT /home/roger/raspi/sysroot)
-set(CMAKE_STAGING_PREFIX /home/roger/stage)
+set(CMAKE_SYSROOT /home/<your user name>/raspi/sysroot)
+set(CMAKE_STAGING_PREFIX /home/<your user name>/stage)
 
-set(tools /home/roger/raspi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64)
+set(tools /home/<your user name>/raspi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64)
 set(CMAKE_C_COMPILER ${tools}/bin/arm-linux-gnueabihf-gcc)
 set(CMAKE_CXX_COMPILER ${tools}/bin/arm-linux-gnueabihf-g++)
 
