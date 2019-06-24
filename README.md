@@ -22,12 +22,16 @@ Firstly we need to prepare a directory on the host system containing a sysroot f
  rsync -avz pi@raspberrypi_ip:/usr/lib sysroot/usr
  rsync -avz pi@raspberrypi_ip:/opt/vc sysroot/opt
  ```
- 4. Make all the symbolic links in the sysroot relative. Again I pull a script from github to do this.
+4. Make all the symbolic links in the sysroot relative. Again I pull a script from github to do this.
 
   ```shell
   wget -P ~/raspi https://raw.githubusercontent.com/riscv/riscv-poky/master/scripts/sysroot-relativelinks.py
 chmod +x ~/raspi/sysroot-relativelinks.py
 ~/raspi/sysroot-relativelinks.py ~/raspi/sysroot
 ```
-4. The sysroot and tools are now ready.
-# Work in progress
+5. The sysroot and toolchain are now ready for use. The compiler can be tested as follows.
+
+ ```shell
+ echo "int main() {}" | /<path to your tools>/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc --sysroot=/<path to your sysroot>/sysroot -xc -
+ file a.out
+ ```
