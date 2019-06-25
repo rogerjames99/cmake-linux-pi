@@ -41,4 +41,9 @@ CMake provides an excellent environment for cross compilation. All the informati
 1. Copy the example-cross-compile.cmake file provided, into the root of your CMake source tree.
 2. Edit the local file to point at your sysroot and tools directories.
 3. I strongly suggest you make a clean out of source tree build directory and run your preferred cmake command from there.
-4. You need to tell CMake where the toolchain file is. This is done by passing it the command line parameter "-DCMAKE_TOOLCHAIN_FILE=example-cross-compile.cmake".
+4. You need to tell CMake where the toolchain file is. This is done by passing it the command line parameter "-DCMAKE_TOOLCHAIN_FILE=example-cross-compile.cmake". For example from your new build directory.
+
+ ```shell
+ ccmake -DCMAKE_TOOLCHAIN_FILE=example-cross-compile.cmake <path to your source directory>
+ ```
+You can ignore any warningss about unused manual parameters.
