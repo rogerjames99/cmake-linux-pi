@@ -37,8 +37,8 @@ chmod +x ~/raspi/sysroot-relativelinks.py
  ```
 
 ## Stage 2 - Adding cross compilation to a CMake source tree.
-**THIS IS STILL A WORK IN PROGRESS IT WILL NOT WORK YET. I HAVE MESSED SOMETHING UP**
 CMake provides an excellent environment for cross compilation. All the information required can be placed in a single file in the root of the source tree.
-1. Copy the example-crosscompile.cmake file provided, into the root of your CMake source tree.
+1. Copy the example-cross-compile.cmake file provided, into the root of your CMake source tree.
 2. Edit the local file to point at your sysroot and tools directories.
 3. I strongly suggest you make a clean out of source tree build directory and run your preferred cmake command from there.
+4. You need to tell CMake where the toolchain file is. This is done by passing it the command line parameter "-DCMAKE_TOOLCHAIN_FILE=example-cross-compile.cmake".
