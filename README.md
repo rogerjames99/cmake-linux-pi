@@ -53,7 +53,7 @@ CMake provides an excellent environment for cross compilation. All the informati
  ccmake -DCMAKE_TOOLCHAIN_FILE=example-cross-compile.cmake <path to your source directory>
  ```
  You can ignore any warnings about unused manual parameters.
-5. If you want to use cmake-gui. Just run the command from your new build directory with no parameters. When the gui launches you need to select your source tree. When you start configuring you will be asked to specify a generator. Select your preferred generator and then in the options select "Specify toolchain file for cross-compiling". When asked for the file name browse to example-cross-compile.cmake in your source tree. Thats it!
+ 5. If you want to use cmake-gui. Just run the command from your new build directory with no parameters. When the gui launches you need to select your source tree. When you start configuring you will be asked to specify a generator. Select your preferred generator and then in the options select "Specify toolchain file for cross-compiling". When asked for the file name browse to example-cross-compile.cmake in your source tree. Thats it!
 
 ## Trouble shooting
 The most common problem is not setting up the sysroot properly. Have a look at the sysroot-contents file in this directory to see the contents and structure of the sysroot.
