@@ -9,11 +9,13 @@ Firstly prepare a directory on the host system containing a sysroot from the tar
 1. Choose a location. I use a directory called raspi in my home directory.
 
  ```shell
- mkdir ~/raspi```
+ mkdir ~/raspi
+ ```
 2. Clone the raspberrypi/tools repository into the directory.
 
  ```shell
- git clone https://github.com/raspberrypi/tools.git ~/raspi/tools```
+ git clone https://github.com/raspberrypi/tools.git ~/raspi/tools
+ ```
 3. Make the sysroot.
 
  ```shell
@@ -22,18 +24,21 @@ Firstly prepare a directory on the host system containing a sysroot from the tar
  rsync -avz pi@raspberrypi_ip:/lib sysroot
  rsync -avz pi@raspberrypi_ip:/usr/include sysroot/usr
  rsync -avz pi@raspberrypi_ip:/usr/lib sysroot/usr
- rsync -avz pi@raspberrypi_ip:/opt/vc sysroot/opt```
+ rsync -avz pi@raspberrypi_ip:/opt/vc sysroot/opt
+ ```
 4. Make all the symbolic links in the sysroot relative. Again I pull a script from github to do this.
 
   ```shell
   wget -P ~/raspi https://raw.githubusercontent.com/riscv/riscv-poky/master/scripts/sysroot-relativelinks.py
-chmod +x ~/raspi/sysroot-relativelinks.py
-~/raspi/sysroot-relativelinks.py ~/raspi/sysroot```
+  chmod +x ~/raspi/sysroot-relativelinks.py
+  ~/raspi/sysroot-relativelinks.py ~/raspi/sysroot
+  ```
 5. The sysroot and toolchain are now ready for use. The compiler can be tested as follows.
 
  ```shell
  echo "int main() {}" | /<path to your tools>/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc --sysroot=/<path to your sysroot>/sysroot -xc -
- file a.out```
+ file a.out
+ ```
  The output of the file should show the file as for an arm system.
 
 
@@ -45,8 +50,9 @@ CMake provides an excellent environment for cross compilation. All the informati
 4. You need to tell CMake where the toolchain file is. This is done by passing it the command line parameter "-DCMAKE_TOOLCHAIN_FILE=example-cross-compile.cmake". For example from your new build directory.
 
  ```shell
- ccmake -DCMAKE_TOOLCHAIN_FILE=example-cross-compile.cmake <path to your source directory>```
-You can ignore any warnings about unused manual parameters.
+ ccmake -DCMAKE_TOOLCHAIN_FILE=example-cross-compile.cmake <path to your source directory>
+ ```
+ You can ignore any warnings about unused manual parameters.
 5. If you want to use cmake-gui. Just run the command from your new build directory with no parameters. When the gui launches you need to select your source tree. When you start configuring you will be asked to specify a generator. Select your preferred generator and then in the options select "Specify toolchain file for cross-compiling". When asked for the file name browse to example-cross-compile.cmake in your source tree. Thats it!
 
 ## Trouble shooting
